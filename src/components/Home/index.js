@@ -1,9 +1,12 @@
 // Write your code here
-import './index.css'
+
 import Loader from 'react-loader-spinner'
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css'
 import {Component} from 'react'
 import TeamCard from '../TeamCard'
+import './index.css'
+
+const teamsApiUrl = 'https://apis.ccbp.in/ipl'
 
 class Home extends Component {
   state = {teamsData: [], isLoading: true}
@@ -13,7 +16,7 @@ class Home extends Component {
   }
 
   getTeamsList = async () => {
-    const response = await fetch('https://apis.ccbp.in/ipl')
+    const response = await fetch(teamsApiUrl)
     const fetchData = await response.json()
     const updatedData = fetchData.teams.map(eachData => ({
       name: eachData.name,
