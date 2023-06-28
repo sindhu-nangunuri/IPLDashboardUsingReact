@@ -18,6 +18,7 @@ class Home extends Component {
   getTeamsList = async () => {
     const response = await fetch(teamsApiUrl)
     const fetchData = await response.json()
+    console.log(fetchData)
     const updatedData = fetchData.teams.map(eachData => ({
       name: eachData.name,
       imageUrl: eachData.team_image_url,
@@ -28,7 +29,7 @@ class Home extends Component {
   }
 
   renderLoader = () => (
-    <div data-testid="loader">
+    <div testid="loader">
       <Loader type="Rings" color="#00BFFF" height={80} width={80} />
     </div>
   )
@@ -53,7 +54,7 @@ class Home extends Component {
             <img
               src="https://assets.ccbp.in/frontend/react-js/ipl-logo-img.png"
               className="ipl-logo"
-              alt="ipl-logo"
+              alt="ipl logo"
             />
             <h1 className="header-heading">IPL Dashboard</h1>
           </div>

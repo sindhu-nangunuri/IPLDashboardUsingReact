@@ -8,7 +8,7 @@ import LatestMatch from '../LatestMatch'
 import MatchCard from '../MatchCard'
 
 class TeamMatches extends Component {
-  state = {matchesData: {}, isLoading: true}
+  state = {matchesData: [], isLoading: true}
 
   componentDidMount = () => {
     this.getTeamMatches()
@@ -25,15 +25,15 @@ class TeamMatches extends Component {
       latestMatchDetails: {
         id: fetchedData.latest_match_details.id,
         competingTeam: fetchedData.latest_match_details.competing_team,
-        competingTeamLogo: fetchedData.latestMatchDetails.competing_team_logo,
-        date: fetchedData.latestMatchDetails.date,
-        firstInnings: fetchedData.latestMatchDetails.first_innings,
-        manOfTheMatch: fetchedData.latestMatchDetails.man_of_the_match,
-        matchStatus: fetchedData.latestMatchDetails.match_status,
-        result: fetchedData.latestMatchDetails.result,
-        secondInnings: fetchedData.latestMatchDetails.second_innings,
-        umpires: fetchedData.latestMatchDetails.umpires,
-        venue: fetchedData.latestMatchDetails.venue,
+        competingTeamLogo: fetchedData.latest_match_details.competing_team_logo,
+        date: fetchedData.latest_match_details.date,
+        firstInnings: fetchedData.latest_match_details.first_innings,
+        manOfTheMatch: fetchedData.latest_match_details.man_of_the_match,
+        matchStatus: fetchedData.latest_match_details.match_status,
+        result: fetchedData.latest_match_details.result,
+        secondInnings: fetchedData.latest_match_details.second_innings,
+        umpires: fetchedData.latest_match_details.umpires,
+        venue: fetchedData.latest_match_details.venue,
       },
       recentMatches: fetchedData.recent_matches.map(recentMatch => ({
         umpires: recentMatch.umpires,
@@ -50,21 +50,25 @@ class TeamMatches extends Component {
       })),
     }
 
+    console.log(updatedData)
+
     this.setState({matchesData: updatedData, isLoading: false})
   }
 
-  renderLoader = () => {
-    ;<div data-testid="loader" className="loader-container">
+  renderLoader = () => (
+    <div testid="loader" className="loader-container">
       <Loader type="Oval" color="#ffffff" height={50} width={50} />
     </div>
-  }
+  )
 
   renderTeamMatches = () => {
     const {matchesData} = this.state
     const {teamBannerUrl, latestMatchDetails} = matchesData
+    console.log(teamBannerUrl)
+    console.log(latestMatchDetails)
     return (
       <div className="team-matches-container">
-        <img src={teamBannerUrl} alt="img" className="team-banner" />
+        <img src={teamBannerUrl} alt="img" className="team banner" />
         <LatestMatch latestMatch={latestMatchDetails} />
         {this.renderRecentMatchesList()}
       </div>
